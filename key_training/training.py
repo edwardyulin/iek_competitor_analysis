@@ -1,0 +1,4 @@
+
+
+class TitleTraining:
+    print("hi")
