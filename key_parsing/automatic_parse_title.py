@@ -15,7 +15,7 @@ class AutoParser:
             for token in title_to_parse:
                 all_keys.append(token.text)
         # all keys
-        print(all_keys)
+        #print(all_keys)
 
     # write each row/title
     def get_each_title_count(self, titles, all_keys, keys_by_arti, count_by_arti, nlp):
@@ -25,7 +25,7 @@ class AutoParser:
             # print(title_to_parse.text)
             for token in title_to_parse:
                 current_arti_keys.append(token.text)
-            print(current_arti_keys)
+            #print(current_arti_keys)
             keys_by_arti.append(current_arti_keys)
             current_arti_count = []
             for j in range(len(all_keys)):
@@ -44,8 +44,8 @@ class AutoParser:
                 sum += row_list[j][i]
             sum_for_each_key.append(sum)
 
-        print(sum_for_each_key)
-        print(len(sum_for_each_key) == len(all_keys))
+        #print(sum_for_each_key)
+        #print(len(sum_for_each_key) == len(all_keys))
 
     def pipeline(self):
         input_excel = pd.ExcelFile(r'C:\Users\Jim Lee\Desktop\競品分析\test_parse.xlsx')
@@ -79,7 +79,3 @@ class AutoParser:
 
 
     #TODO: PRINT OUTPUT TO EXCEL
-
-
-
-
