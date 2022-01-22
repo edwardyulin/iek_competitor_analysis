@@ -40,7 +40,7 @@ for i in range(size_of_data):
 print(all_data)
 
 
-# draw empty table for all counts
+# draw a table with zeroes for all counts
 for i in range(size_of_data):
     current_row = []
     for j in range(len(key_list)):
