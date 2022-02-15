@@ -2,6 +2,7 @@ import zh_core_web_lg
 import pandas as pd
 import spacy
 import numpy as np
+import xlsxwriter
 
 """
 Word2Vec Model: compare vectors from each parsed words with vectors from each keyword by dot product (how similar they are)
@@ -115,14 +116,29 @@ def tally_count(size_of_data, key_list, table_of_counts, total):
         for j in range(size_of_data):
             count += table_of_counts[j][i]
         total.append(count)
-    print(total)
 
 
-# TODO: train vector values with key vector for all known articles
+# output the results to excel
+def write_to_excel(keys, toc, total):
+    with xlsxwriter.Workbook('test.xlsx') as workbook:
+        worksheet = workbook.add_worksheet()
+        to_output = [keys] + toc + [total]
+        print(to_output)
+        for i in range(len(toc) + 2):
+            if i == 0:
+                to_output[i].insert(0, "Keys")
+            elif i == len(toc) + 1:
+                to_output[i].insert(0, "Sum")
+            else:
+                to_output[i].insert(0, "Article " + str(i + 1))
+        for col_num, data in enumerate(to_output):
+            worksheet.write_column(0, col_num, data)
 
 
+
+# pipeline for word2vec
 def pipeline():
-    input_excel = pd.ExcelFile(r'C:\Users\Jim Lee\Desktop\競品分析\test_parse.xlsx')  # or use other .xlsx files
+    input_excel = pd.ExcelFile(r'C:\Users\Jim Lee\PycharmProjects\iek_competitor_analysis\test_parse.xlsx')  # or use other .xlsx files
     data = pd.read_excel(input_excel, sheet_name="for_training", usecols="C:N")
     keys = pd.read_excel(input_excel, sheet_name="for_training", usecols="P:AN")
     data_list = list(data.columns.values)
@@ -151,6 +167,9 @@ def pipeline():
     # evaluation and categorization
     check_requirement(all_dots, table_of_counts)
     tally_count(size_of_data, key_list, table_of_counts, total)
+    print(table_of_counts)
+    print(total)
+    write_to_excel(key_list, table_of_counts, total)
 
 
 if __name__ == '__main__':

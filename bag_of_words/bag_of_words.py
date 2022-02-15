@@ -12,7 +12,7 @@ CONS: inaccurate because words need to be exact, no order involved
 """
 
 
-input_excel = pd.ExcelFile(r'C:\Users\Jim Lee\Desktop\競品分析\test_parse.xlsx')  # or use other .xlsx files
+input_excel = pd.ExcelFile(r'C:\Users\Jim Lee\PycharmProjects\iek_competitor_analysis\test_parse.xlsx')  # or use other .xlsx files
 data = pd.read_excel(input_excel, sheet_name="for_training", usecols="C:N")
 keys = pd.read_excel(input_excel, sheet_name="for_training", usecols="P:AN")
 data_list = list(data.columns.values)
